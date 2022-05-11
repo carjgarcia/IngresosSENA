@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body{
+    background-color: #FF6B00;
+}
+
+.camara {
+    background-color: antiquewhite;
+    height: 100vh;
+}
+
+.contenedor {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.datos { 
+    margin: auto;
+    color: white;
+    padding: 0 10px, 10px;
+    height: 100vh; 
+    align-items: center;
+    background: #373B44;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4286f4, #373B44);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4286f4, #373B44); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+
+.formulario {
+    padding: 35px;  
+}
+
+h2 {
+    color: white;
+    text-align: center;
+    font-weight: 600;
+}
+
+.tabla-articulos {
+    color: white;
+    margin-top: 10%;
+}
+
+.tabla-articulos tr{
+    color: white;
+}
+
+
