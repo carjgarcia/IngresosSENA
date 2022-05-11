@@ -84,6 +84,13 @@ h2 {
     color: white;
 }
 
+#sidebar a{
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: left;
+}
+
 .tm-sidebar-left {
     position: fixed;
     z-index: 100;
@@ -143,6 +150,10 @@ h2 {
 }
 
 #sidebar .user h3{
+    color: white;
+}
+
+#sidebar .uk-nav-default li{
     color: white;
 }
 
