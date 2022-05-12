@@ -9,57 +9,9 @@
 
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<div uk-sticky class="uk-navbar-container tm-navbar-container uk-active uk-light">
-    <div class="uk-container uk-container-expand">
-        <nav uk-navbar>
-            <div class="uk-navbar-left">
-                <a id="sidebar_toggle" class="uk-navbar-toggle" uk-navbar-toggle-icon></a>
-                <a href="#" class="uk-navbar-item uk-logo">
-                    Ingresos Sena
-                </a>
-            </div>
-            <div class="uk-navbar-right uk-light">
-                <ul class="uk-navbar-nav">
-                    <li class="uk-active">
-                        <a href="#">Carlos Garcia &nbsp;<span uk-icon="chevron-down"></span></a>
-                        <div uk-dropdown="pos: bottom-right; mode: click; offset: -17;">
-                            <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li class="uk-nav-header">Opciones</li>
-                                <li><a href="#">Editar Perfil</a></li>
-                                <li class="uk-nav-header">Acciones</li>
-                                <li><a href="../index.html">Cerrar sesión</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-</div>
 
-<div id="sidebar" class="tm-sidebar-left uk-background-default">
-    <div class="user">
-        <img id="avatar" width="100" class="uk-border-circle" src="../img/usuario.png" />
-        <div class="uk-margin-top"></div>
-        <h3 class="uk-text-truncate">Carlos Garcia</h3>
-        <div id="email" class="uk-text-truncate">carlitosG@gmail.com</div>
-        <span id="status" class="uk-margin-top uk-label uk-label-success">Conectado</span>
-    </div>
-    <br />
-    
-    <ul class="uk-nav uk-nav-default">
-
-        <li class="uk-nav-header">
-            Instructor
-        </li>
-        <li><a href="../home.html"><button class="btn btn-light">Inicio</button></a></li>
-        <li><a href="ingreso.html"><button class="btn btn-success">Ingreso</button></a></li>
-        <li><a href="salida.html"><button class="btn btn-warning">Salida</button></a></li>  
-        <li><a href=""><button class="btn btn-danger">Cerrar Sesión</button></a></li>
-
-    </ul>
-</div>
+<?php include("../includes/navTop.php");?>
+<?php include("../includes/navLateral.php");?>
 
 <div class="content-padder content-background">
     <div class="uk-section-small uk-section-default header">
