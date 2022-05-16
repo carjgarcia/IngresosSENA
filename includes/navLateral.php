@@ -2,8 +2,8 @@
     <div class="user">
         <img id="avatar" width="100" class="uk-border-circle" src="../img/usuario.png" />
         <div class="uk-margin-top"></div>
-        <h3 class="uk-text-truncate">Carlos Garcia</h3>
-        <div id="email" class="uk-text-truncate">carlitosG@gmail.com</div>
+        <h3 class="uk-text-truncate"><?php echo $usuario['nombre'];?></h3>
+        <div id="email" class="uk-text-truncate"><?php echo $usuario['correo'];?></div>
         <span id="status" class="uk-margin-top uk-label uk-label-success">Conectado</span>
     </div>
     <br />

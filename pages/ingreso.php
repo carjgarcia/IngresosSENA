@@ -1,3 +1,18 @@
+<?php
+    include("../includes/conexion.php");
+    session_start();
+    if (!isset($_SESSION['idUser'])) {
+        header("Location: ../index.html");
+    }
+    $cedula=$_SESSION['idUser'];
+    include("../includes/rellenar_datos_usuario.php");
+    $time= mysqli_query($con,"SELECT CURRENT_TIME();");
+    if (!$time) {
+        die("ERROR AL CONSULTAR HORA");
+    }
+    $horaActual= mysqli_fetch_array($time)['CURRENT_TIME()'];
+
+?>
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -20,7 +35,7 @@
             <p>
             </p>
             <ul class="uk-breadcrumb">
-                <li><a href="../home.html">Inicio</a></li>
+                <li><a href="../home.php">Inicio</a></li>
                 <li><span href="" class="bold">Ingresos</span></li>
             </ul>
         </div>
@@ -30,27 +45,27 @@
             <h2>Datos Personales</h2>
             <div class="mb-3">
                 <label for="idDocumento" class="form-label">No. de documento</label>
-                <input type="text" class="form-control" id="idDocumento" readonly>
+                <input type="text" class="form-control" id="idDocumento" value="<?php echo $cedula;?>" readonly>
             </div>
             <div class="mb-3">
                 <label for="nombres" class="form-label">Nombres Completo</label>
-                <input type="text" class="form-control" id="nombres">
+                <input type="text" class="form-control" id="nombres" value="<?php echo $usuario['nombre'];?>">
             </div>
 
             <div class="mb-3">
                 <label for="Correo" class="form-label">Correo electronico</label>
-                <input type="email" class="form-control" id="Correo">
+                <input type="email" class="form-control" id="Correo" value="<?php echo $usuario['correo'];?>">
             </div>
 
             <div class="mb-3">
                 <label for="sede" class="form-label">Sede o nodo a la que pertenece</label>
                 <select class="form-select" aria-label="Default select example" id="sede">
                     <option selected value="ninguno">Sede o Nodo</option>
-                    <option value="Nodo Electricida Y Electronica">Nodo Electricidad Y Electronica</option>
-                    <option value="Centro De Comercio Y Servicios">Centro De Comercio Y Servicios</option>
-                    <option value="Sede Energía">SENA Sede Energía</option>
-                    <option value="Sede TIC">Sede TIC</option>
-                    <option value="Sede Logística y Transporte">Sede Logística y Transporte</option>
+                    <option value="Nodo Electricida Y Electronica" <?php if(isset($usuario['sede'])) if($usuario['sede']=="Nodo Electricida Y Electronica") echo 'selected'?>>Nodo Electricidad Y Electronica</option>
+                    <option value="Centro De Comercio Y Servicios" <?php if(isset($usuario['sede'])) if($usuario['sede']=="Centro De Comercio Y Servicios") echo 'selected'?>>Centro De Comercio Y Servicios</option>
+                    <option value="Sede Energía" <?php if(isset($usuario['sede'])) if($usuario['sede']=="Sede Energía") echo 'selected'?>>SENA Sede Energía</option>
+                    <option value="Sede TIC" <?php if(isset($usuario['sede'])) if($usuario['sede']=="Sede TIC") echo 'selected'?>>Sede TIC</option>
+                    <option value="Sede Logística y Transporte" <?php if(isset($usuario['sede'])) if($usuario['sede']=="Sede Logística y Transporte") echo 'selected'?>>Sede Logística y Transporte</option>
                 </select>
             </div>
 
@@ -185,12 +200,12 @@
             </div> -->
             <div class="mb-3">
                 <label for="fecha" class="form-label">Fecha Actual</label>
-                <input type="text" class="form-control" id="fecha" readonly>
+                <input type="text" class="form-control" id="fecha" value="<?php echo date('Y-d-m');?>" readonly>
             </div>
 
             <div class="mb-3">
                 <label for="hora" class="form-label">Hora Actual</label>
-                <input type="text" class="form-control" id="hora" readonly>
+                <input type="text" class="form-control" id="hora" value="<?php echo $horaActual;?>" readonly>
             </div>
 
             <div class="mb-3 buttons">

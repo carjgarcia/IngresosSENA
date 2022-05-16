@@ -90,7 +90,7 @@
             </p>
             <ul class="uk-breadcrumb">
                 <li><a href="home.html" class="bold">Inicio</a></li>
-                <a href="./pages/ingreso.html"><li><span>Ingreso</span></li></a>
+                <a href="./pages/ingreso.php"><li><span>Ingreso</span></li></a>
             </ul>
         </div>
     </div>
