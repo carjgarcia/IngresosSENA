@@ -8,7 +8,7 @@ var sede = document.getElementById("sede");
 sede.addEventListener("change", function () {
   var selectedOption = this.options[sede.selectedIndex];
   var opcion=selectedOption.value;
-  if (opcion!="Sede TIC") {
+  if (opcion!="Sede TIC" && opcion!="ninguno") {
     document.querySelector('#motivoView').style.display="block";
   }else{
     document.querySelector('#motivoView').style.display="none";

@@ -11,6 +11,58 @@
         die("ERROR AL CONSULTAR HORA");
     }
     $horaActual= mysqli_fetch_array($time)['CURRENT_TIME()'];
+    $alerta=null;
+
+    $nombres=null;
+    $correo=null;
+    $sede=$usuario['sede'];
+    
+    $motivo=null;
+
+    $vehiculo=null;
+    $dispositivosIngresados=null;
+    if (isset($_POST['btnadd'])){
+    }else if(isset($_POST['btncancel'])){
+        $dispositivo=$_POST['dispositivo'];
+        if ($dispositivo!="ninguno") {
+            if ($dispositivo!="otro") {
+                if (isset($_POST[""])) {
+
+                }
+            } else {
+    
+            }
+    
+            if (!isset($alerta)) {
+    
+            }
+                        
+        }
+    }else if(isset($_POST['ingresar'])){
+
+        if (isset($_POST['nombres']) && isset($_POST['correo'])) {
+            $nombres=$_POST['nombres'];
+            $correo=$_POST['correo'];
+            $sede=$_POST['sede'];
+            if ($sede!="ninguno") {
+                if ($sede!="Sede TIC") {
+                    if ($_POST["motivo"]=="") {
+                        $alerta="Debe especificar el motivo de su visita al nodo!";
+                    }
+                }
+                if (!isset($alerta)) {
+                    $motivo=$_POST["motivo"];
+                }
+            }else{
+                $alerta="Debe seleccionar sede o nodo al que pertenece!";
+            }
+        }
+
+    }
+
+
+
+
 
 ?>
 <!DOCTYPE html>
@@ -41,7 +93,12 @@
         </div>
     </div>
     <div class="uk-section-small">
-        <form style="margin: 0 100px;">
+        <form style="margin: 0 100px;" method="POST" action="">
+        <?php if(isset($alerta)):?>
+            <div class="alert alert-danger" role="alert" style="font-size: 20px;">
+                <?php echo $alerta;?>
+            </div>
+        <?php endif;?>
             <h2>Datos Personales</h2>
             <div class="mb-3">
                 <label for="idDocumento" class="form-label">No. de documento</label>
@@ -49,32 +106,32 @@
             </div>
             <div class="mb-3">
                 <label for="nombres" class="form-label">Nombres Completo</label>
-                <input type="text" class="form-control" id="nombres" value="<?php echo $usuario['nombre'];?>">
+                <input type="text" class="form-control" id="nombres" name="nombres" value="<?php echo $usuario['nombre'];?>" required>
             </div>
 
             <div class="mb-3">
                 <label for="Correo" class="form-label">Correo electronico</label>
-                <input type="email" class="form-control" id="Correo" value="<?php echo $usuario['correo'];?>">
+                <input type="email" class="form-control" id="Correo" name="correo" value="<?php echo $usuario['correo'];?>" required>
             </div>
 
             <div class="mb-3">
                 <label for="sede" class="form-label">Sede o nodo a la que pertenece</label>
-                <select class="form-select" aria-label="Default select example" id="sede">
+                <select class="form-select" aria-label="Default select example" id="sede" name="sede">
                     <option selected value="ninguno">Sede o Nodo</option>
-                    <option value="Nodo Electricida Y Electronica" <?php if(isset($usuario['sede'])) if($usuario['sede']=="Nodo Electricida Y Electronica") echo 'selected'?>>Nodo Electricidad Y Electronica</option>
-                    <option value="Centro De Comercio Y Servicios" <?php if(isset($usuario['sede'])) if($usuario['sede']=="Centro De Comercio Y Servicios") echo 'selected'?>>Centro De Comercio Y Servicios</option>
-                    <option value="Sede Energía" <?php if(isset($usuario['sede'])) if($usuario['sede']=="Sede Energía") echo 'selected'?>>SENA Sede Energía</option>
-                    <option value="Sede TIC" <?php if(isset($usuario['sede'])) if($usuario['sede']=="Sede TIC") echo 'selected'?>>Sede TIC</option>
-                    <option value="Sede Logística y Transporte" <?php if(isset($usuario['sede'])) if($usuario['sede']=="Sede Logística y Transporte") echo 'selected'?>>Sede Logística y Transporte</option>
+                    <option value="Nodo Electricidad Y Electronica" <?php if(isset($sede)) if($sede=="Nodo Electricidad Y Electronica") echo 'selected'?>>Nodo Electricidad Y Electronica</option>
+                    <option value="Centro De Comercio Y Servicios" <?php if(isset($sede)) if($sede=="Centro De Comercio Y Servicios") echo 'selected'?>>Centro De Comercio Y Servicios</option>
+                    <option value="Sede Energía" <?php if(isset($sede)) if($sede=="Sede Energía") echo 'selected'?>>SENA Sede Energía</option>
+                    <option value="Sede TIC" <?php if(isset($sede)) if($sede=="Sede TIC") echo 'selected'?>>Sede TIC</option>
+                    <option value="Sede Logística y Transporte" <?php if(isset($sede)) if($sede=="Sede Logística y Transporte") echo 'selected'?>>Sede Logística y Transporte</option>
                 </select>
             </div>
 
 
             <h2>Información de Ingreso</h2>
 
-            <div class="mb-3 hiddenInput" id="motivoView">
+            <div class="mb-3 <?php if(isset($sede)) if($sede=="Sede TIC" || $sede=="") echo 'hiddenInput';?>" id="motivoView">
                 <label for="floatingTextarea" class="form-label">Motivo Ingreso</label>
-                <textarea class="form-control" id="floatingTextarea" placeholder="Digite el motivo de Ingreso "></textarea>
+                <textarea class="form-control" id="floatingTextarea" name="motivo" placeholder="Digite el motivo de Ingreso "></textarea>
             </div>
 
             <div class="mb-3">
@@ -87,10 +144,10 @@
                     <label class="btn btn-outline-primary" for="btnradio4">NO</label>
                 </div> -->
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
                     <label class="btn btn-outline-danger" for="btnradio1">SI</label>
                   
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" checked>
                     <label class="btn btn-outline-danger" for="btnradio2">NO</label>
                   </div>
             </div>
@@ -119,7 +176,7 @@
 
             <div class="mb-3">
                 <label for="dispositivo" class="form-label">¿Trae algun dispositivo?</label>
-                <select class="form-select" aria-label="Default select example" id="dispositivo">
+                <select class="form-select" aria-label="Default select example" id="dispositivo" name="dispositivo">
                     <option selected value="ninguno">Ninguno</option>
                     <option value="portatil">Portátil</option>
                     <option value="celular">Celular</option>
@@ -136,22 +193,22 @@
             <div class="form-group hiddenInput" id="dispositivoDiv">
                 <div class="mb-3">
                     <label for="marca" class="form-label">Marca del dispositivo</label>
-                    <input type="text" class="form-control" id="marca" placeholder="Digite el código del artículo">
+                    <input type="text" class="form-control" id="marca" name="marca" placeholder="Digite el código del artículo">
                 </div>
 
                 <div class="mb-3">
                     <label for="serial" class="form-label">Serial</label>
-                    <input type="text" class="form-control" id="serial" placeholder="Digite el serial del equipo">
+                    <input type="text" class="form-control" id="serial" name="serial" placeholder="Digite el serial del equipo">
                 </div>
 
                 <div class="mb-3">
                     <label for="Placa" class="form-label">Placa</label>
-                    <input type="text" class="form-control" id="Placa" placeholder="Digite placa de equipo">
+                    <input type="text" class="form-control" id="Placa" name="placa" placeholder="Digite placa de equipo">
                 </div>
 
                 <div class="mb-3">
                     <label for="propietario" class="form-label">Propietario</label>
-                    <select class="form-select" aria-label="Default select example" id="propietario">
+                    <select class="form-select" aria-label="Default select example" id="propietario" name="uso">
                         <option selected value="sena">Propietario</option>
                         <option value="sena">SENA</option>
                         <option value="personal">Personal</option>
@@ -160,18 +217,18 @@
 
                 <div class="mb-3">
                     <label for="cantidad" class="form-label">Cantidad</label>
-                    <input type="number" class="form-control" id="cantidad" placeholder="Digite la cantidad">
+                    <input type="number" class="form-control" id="cantidad" name="catidad" placeholder="Digite la cantidad">
                 </div>
                 
                 <div class="d-grid gap-2 d-md-block text-center">
-                    <button class="btn btn-success" type="button">
+                    <button class="btn btn-success" type="submit" name="btnadd">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                         </svg>
                         Añadir
                     </button>
-                    <button class="btn btn-danger" type="button">
+                    <button class="btn btn-danger" type="submit" name="btncancel">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -180,13 +237,16 @@
                     </button>
                 </div>
 
-                <div class="mb-3">
-                    <label for="cantidad" class="form-label">Mis dispositivos</label>
-                    <textarea name="" id="" class="form-control" cols="30" rows="6"></textarea>
-                </div>
                 
-
+                
             </div>
+
+            <?php if(isset($_SESSION['dispositivos'])):?>
+            <div class="mb-3">
+                <label for="cantidad" class="form-label">Mis dispositivos</label>
+                <textarea name="" id="" class="form-control" cols="30" rows="6"></textarea>
+            </div>
+            <?php endif;?>
             
             <!-- <div class="mb-3">
                 <label for="autoriza" class="form-label">Autoriza</label>
@@ -209,7 +269,7 @@
             </div>
 
             <div class="mb-3 buttons">
-                <button type="button" class="btn btn-primary button" id="btnIngresar">Ingresar</button>
+                <button type="submit" class="btn btn-primary button" id="btnIngresar" name="ingresar">Ingresar</button>
             </div>
 
 
