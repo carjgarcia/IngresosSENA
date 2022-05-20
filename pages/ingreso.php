@@ -105,7 +105,7 @@
                 <input type="text" class="form-control" id="idDocumento" value="<?php echo $cedula;?>" readonly>
             </div>
             <div class="mb-3">
-                <label for="nombres" class="form-label">Nombres Completo</label>
+                <label for="nombres" class="form-label">Nombres Completos</label>
                 <input type="text" class="form-control" id="nombres" name="nombres" value="<?php echo $usuario['nombre'];?>" required>
             </div>
 
@@ -118,10 +118,10 @@
                 <label for="sede" class="form-label">Sede o nodo a la que pertenece</label>
                 <select class="form-select" aria-label="Default select example" id="sede" name="sede">
                     <option selected value="ninguno">Sede o Nodo</option>
+                    <option value="Sede TIC" <?php if(isset($sede)) if($sede=="Sede TIC") echo 'selected'?>>Sede TIC</option>
                     <option value="Nodo Electricidad Y Electronica" <?php if(isset($sede)) if($sede=="Nodo Electricidad Y Electronica") echo 'selected'?>>Nodo Electricidad Y Electronica</option>
                     <option value="Centro De Comercio Y Servicios" <?php if(isset($sede)) if($sede=="Centro De Comercio Y Servicios") echo 'selected'?>>Centro De Comercio Y Servicios</option>
-                    <option value="Sede Energía" <?php if(isset($sede)) if($sede=="Sede Energía") echo 'selected'?>>SENA Sede Energía</option>
-                    <option value="Sede TIC" <?php if(isset($sede)) if($sede=="Sede TIC") echo 'selected'?>>Sede TIC</option>
+                    <option value="Sede Energía" <?php if(isset($sede)) if($sede=="Sede Energía") echo 'selected'?>>SENA Sede Energía</option>    
                     <option value="Sede Logística y Transporte" <?php if(isset($sede)) if($sede=="Sede Logística y Transporte") echo 'selected'?>>Sede Logística y Transporte</option>
                 </select>
             </div>

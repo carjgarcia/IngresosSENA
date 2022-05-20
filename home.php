@@ -74,8 +74,8 @@
         <li class="uk-nav-header">
             Instructor
         </li>
-        <li><a href="#"><button class="btn btn-light">Inicio</button></a></li>
-        <li><a href="./pages/ingreso.html"><button class="btn btn-success">Ingreso</button></a></li>
+        <li><a href="home.php"><button class="btn btn-light">Inicio</button></a></li>
+        <li><a href="pages/ingreso.php"><button class="btn btn-success">Ingreso</button></a></li>
         <li><a href="./pages/salida.html"><button class="btn btn-warning">Salida</button></a></li>  
         <li><a href=""><button class="btn btn-danger">Cerrar Sesión</button></a></li>
 
@@ -89,7 +89,7 @@
                 Bienvenido, <?php echo $usuario["nombre"];?>
             </p>
             <ul class="uk-breadcrumb">
-                <li><a href="home.html" class="bold">Inicio</a></li>
+                <li><a href="home.php" class="bold">Inicio</a></li>
                 <a href="./pages/ingreso.php"><li><span>Ingreso</span></li></a>
             </ul>
         </div>
