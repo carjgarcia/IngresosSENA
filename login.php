@@ -107,6 +107,7 @@
 		}		
 	}
 ?>
+
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -117,75 +118,77 @@
 
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<div class="login-wrap">
-	<div class="login-html">
-		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab cursorHand">Inicio</label>
-		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab cursorHand">Registro</label>
-		
-		<!--FORMULARIO DE INICIO DE SESIÓN-->
-		<div class="login-form">
-			<form class="sign-in-htm spaceTop" action="" method="POST">
-				<div class="group">
-					<label for="user" class="label">Numero de documento</label>
-					<input id="user" type="text" class="input" name="cedula" value="<?php if(isset($docum)) echo $docum ?>">
-				</div>
-				<div class="group">
-					<label for="pass" class="label">Contraseña</label>
-					<input id="pass" type="password" class="input" data-type="password" name="contra" value="<?php if(isset($passw)) echo $passw; ?>">
-				</div>
-				<div class="group">
-					<input id="check" type="checkbox" class="check">
-					<label for="check"><span class="icon"></span> Recuérdame</label>
-				</div>
-				<div class="group">
-					<input type="submit" name="submitInicio" class="button cursorHand" value="Ingresar">
-				</div>
-				<?php if(isset($alerta)):?>
-				<div class="alerta" style="text-align: center;">
-					<?php echo $alerta;?>
-				</div>
-				<?php endif;?>
-				<div class="hr"></div>
-				<div class="foot-lnk">
-					<a href="index.php">Regresar al inicio?</a>
-				</div>
-			</form>
+	<!-- partial:index.partial.html -->
+	<div class="login-wrap">
+		<div class="login-html">
+			<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab cursorHand">Inicio</label>
+			<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab cursorHand">Registro</label>
+			
+			<!--FORMULARIO DE INICIO DE SESIÓN-->
+			<div class="login-form">
+				<form class="sign-in-htm spaceTop" action="" method="POST">
+					<div class="group">
+						<label for="user" class="label">Numero de documento</label>
+						<input id="user" type="text" class="input" name="cedula" value="<?php if(isset($docum)) echo $docum ?>">
+					</div>
+					<div class="group">
+						<label for="pass" class="label">Contraseña</label>
+						<input id="pass" type="password" class="input" data-type="password" name="contra" value="<?php if(isset($passw)) echo $passw; ?>">
+					</div>
+					<div class="group">
+						<input id="check" type="checkbox" class="check">
+						<label for="check"><span class="icon"></span> Recuérdame</label>
+					</div>
+					<div class="group">
+						<input type="submit" name="submitInicio" class="button cursorHand" value="Ingresar">
+					</div>
+					<?php if(isset($alerta)):?>
+					<div class="alerta" style="text-align: center;">
+						<?php echo $alerta;?>
+					</div>
+					<?php endif;?>
+					<div class="hr"></div>
+					<div class="foot-lnk">
+						<a href="index.php">Regresar al inicio?</a>
+					</div>
 
-			<!--FORMULARIO DE REGISTRO-->		
-			<form class="sign-up-htm spaceTop" action="" method="POST">
-				<div class="group">
-					<label for="cedula" class="label">Numero de identificacion</label>
-					<input id="cedula" type="text" class="input" name="cedular" value="<?php if(isset($cedul)) echo $cedul?>">
-				</div>
-				<div class="group">
-					<label for="user" class="label">Nombre Completo</label>
-					<input id="user" type="text" class="input" name="nombrer" value="<?php if(isset($name)) echo $name?>">
-				</div>
-				<div class="group">
-					<label for="pass" class="label">Contraseña</label>
-					<input id="pass" type="password" class="input" data-type="password" name="contrar">
-				</div>
-				<div class="group">
-					<label for="pass2" class="label">Repetir Contraseña</label>
-					<input id="pass2" type="password" class="input" data-type="password" name="contrar2">
-				</div>
-				<div class="group">
-					<label for="pass" class="label">Correo electronico</label>
-					<input id="pass" type="text" class="input" name="correor" value="<?php if(isset($email)) echo $email?>">
-				</div>
-				<div class="group">
-					<input type="submit" name="submitRegistro" class="button cursorHand" value="Registrarme">
-				</div>
-				<!-- <div class="hr"></div>
-				<div class="foot-lnk">
-					<label for="tab-1" class="cursorHand">Ya tengo cuenta?</a>
-				</div> -->
-			</form>
+					
+				</form>
+
+				<!--FORMULARIO DE REGISTRO-->		
+				<form class="sign-up-htm spaceTop" action="" method="POST">
+					<div class="group">
+						<label for="cedula" class="label">Numero de identificacion</label>
+						<input id="cedula" type="text" class="input" name="cedular" value="<?php if(isset($cedul)) echo $cedul?>">
+					</div>
+					<div class="group">
+						<label for="user" class="label">Nombre Completo</label>
+						<input id="user" type="text" class="input" name="nombrer" value="<?php if(isset($name)) echo $name?>">
+					</div>
+					<div class="group">
+						<label for="pass" class="label">Contraseña</label>
+						<input id="pass" type="password" class="input" data-type="password" name="contrar">
+					</div>
+					<div class="group">
+						<label for="pass2" class="label">Repetir Contraseña</label>
+						<input id="pass2" type="password" class="input" data-type="password" name="contrar2">
+					</div>
+					<div class="group">
+						<label for="pass" class="label">Correo electronico</label>
+						<input id="pass" type="text" class="input" name="correor" value="<?php if(isset($email)) echo $email?>">
+					</div>
+					<div class="group">
+						<input type="submit" name="submitRegistro" class="button cursorHand" value="Registrarme">
+					</div>
+					<!-- <div class="hr"></div>
+					<div class="foot-lnk">
+						<label for="tab-1" class="cursorHand">Ya tengo cuenta?</a>
+					</div> -->
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
-<!-- partial -->
-  
+	<!-- partial -->
+	
 </body>
 </html>

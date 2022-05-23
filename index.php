@@ -8,9 +8,12 @@
   <meta charset="UTF-8">
   <title>Ingreso Sena</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:300,400,700"rel="stylesheet'><link rel="stylesheet" href="css/index.css">
-
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:300,400,700"rel="stylesheet'><link rel="stylesheet" href="css/index.css">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!--SWEETALERT 2 CON CSS-->
+  <script src="assets/sweet/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="assets/sweet/sweetalert2.css">
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -37,7 +40,9 @@
                             <li><a class="scroll" href="#">Inicio</a></li>
                             <li><a class="scroll" href="#about">Nosotros</a></li>
                             <li><a class="scroll" href="login.php">Ingresar</a></li>
-                            <!-- <li><a class="scroll" href="#contact">Contact</a></li> -->
+                            <button id="boton_prueba">ALERTA DE PRUEBA</button>
+                            
+                            
                         </ul>
                     </nav>
                     <nav class="col-md-6 header__top--responsive hidden-lg-up">
@@ -213,9 +218,11 @@
     <section id="footer">
         <p>Made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">Carlitos Garcia</a> <i class="fa fa-copyright" aria-hidden="true"></i>2022</p>
     </section>
+
 <!-- partial -->
+  <script src="js/libreria.js"></script>  
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
   <script src='https://unpkg.com/scrollreveal/dist/scrollreveal.min.js'></script><script  src="./js/index.js"></script>
-
+   
 </body>
 </html>

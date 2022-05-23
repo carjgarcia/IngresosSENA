@@ -78,7 +78,7 @@
         <li><a href="pages/ingreso.php"><button class="btn btn-success">Ingreso</button></a></li>
         <li><a href="./pages/salida.html"><button class="btn btn-warning">Salida</button></a></li>  
         <li><a href=""><button class="btn btn-danger">Cerrar Sesión</button></a></li>
-
+        
     </ul>
 </div>
 <div class="content-padder content-background">
