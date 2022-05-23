@@ -40,7 +40,7 @@
                             <li><a class="scroll" href="#">Inicio</a></li>
                             <li><a class="scroll" href="#about">Nosotros</a></li>
                             <li><a class="scroll" href="login.php">Ingresar</a></li>
-                            <button id="boton_prueba">ALERTA DE PRUEBA</button>
+                            <button id="btnPrueba">ALERTA DE PRUEBA</button>
                             
                             
                         </ul>
@@ -220,7 +220,7 @@
     </section>
 
 <!-- partial -->
-  <script src="js/libreria.js"></script>  
+  <script src="js/alerta.js"></script>  
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
   <script src='https://unpkg.com/scrollreveal/dist/scrollreveal.min.js'></script><script  src="./js/index.js"></script>
    

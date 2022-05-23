@@ -5,6 +5,7 @@
 	/*Validación inicio de sesión*/
 	$docum=null;
 	$passw=null;
+	$alerta=null;
 	if(isset($_POST['submitInicio'])) {
 		$docum=$_POST['cedula'];
 		$passw=$_POST['contra'];
@@ -56,8 +57,7 @@
 	}
 
 	/*Validación formulario de registro*/
-	$alerta=null;
-
+	
 	if(isset($_POST['submitRegistro'])) {
 		$cedul=$_POST['cedular'];
 		$name=$_POST['nombrer'];
@@ -94,8 +94,15 @@
 								if (!$result) {
 									die("Error al guardar usuarios".mysqli_error($con));
 								}else{
-									$alerta = "¡Registro exitoso!";  //USAR ALERTAS NUEVAS
-									header("Location: login.php");
+									'<script>
+										Swal.fire({
+										icon: "success",
+										title: "Genial!",
+										text: "¡Registro exitoso!",
+										window.location = "login.php";
+										});
+									</script>';
+									// header("Location: login.php");
 								}	
 							}else {
 								$alerta = "Las contraseñas no coinciden.";
@@ -115,7 +122,10 @@
   <title>Ingreso Sena</title>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
   <link rel="stylesheet" href="css/login.css">
-
+  <!--SWEETALERT 2 CON CSS-->
+  <script src="assets/sweet/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="assets/sweet/sweetalert2.css">
+  
 </head>
 <body>
 	<!-- partial:index.partial.html -->
@@ -140,7 +150,7 @@
 						<label for="check"><span class="icon"></span> Recuérdame</label>
 					</div>
 					<div class="group">
-						<input type="submit" name="submitInicio" class="button cursorHand" value="Ingresar">
+						<input type="submit" name="submitInicio" id="btnIngresar" class="button cursorHand" value="Ingresar">
 					</div>
 					<?php if(isset($alerta)):?>
 					<div class="alerta" style="text-align: center;">
@@ -178,7 +188,7 @@
 						<input id="pass" type="text" class="input" name="correor" value="<?php if(isset($email)) echo $email?>">
 					</div>
 					<div class="group">
-						<input type="submit" name="submitRegistro" class="button cursorHand" value="Registrarme">
+						<input type="submit" name="submitRegistro" id="btnRegistrar" class="button cursorHand" value="Registrarme">
 					</div>
 					<!-- <div class="hr"></div>
 					<div class="foot-lnk">
@@ -188,7 +198,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- partial -->
-	
+
+	<script src="js/alerta.js"></script>
 </body>
 </html>
