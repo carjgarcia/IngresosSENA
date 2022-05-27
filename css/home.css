@@ -98,7 +98,7 @@ h2 {
     bottom: 0;
     box-sizing: border-box;
     width: 240px !important;
-    padding: 40px 40px 60px 40px;
+    padding: 40px 40px 60px 20px;
     border-right: 1px #e5e5e5 solid;
     overflow-y: auto;
 	overflow-x: hidden;

@@ -8,6 +8,7 @@ body{
 	background-size: cover;
 	height: 100vh;
 	overflow-y: hidden;
+	padding: 0 10px;
 }
 *,:after,:before{box-sizing:border-box}
 .clearfix:after,.clearfix:before{content:'';display:table}
@@ -27,6 +28,7 @@ a{color:inherit;text-decoration:none}
 	background-size: cover;
 	/* background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center; */
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+	
 }
 .login-html{
 	width:100%;

@@ -7,6 +7,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Ingreso Sena</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:300,400,700"rel="stylesheet'><link rel="stylesheet" href="css/index.css">
@@ -35,7 +36,7 @@
                         <h1><span class="bold">Ingreso</span> Sena</h1>
                         <hr>       
                     </div>
-                    <nav class="col-md-6 header__top-nav hidden-md-down">
+                    <!-- <nav class="col-md-6 header__top-nav hidden-md-down">
                         <ul>
                             <li><a class="scroll" href="#">Inicio</a></li>
                             <li><a class="scroll" href="#about">Nosotros</a></li>
@@ -49,12 +50,12 @@
                         <ul>
                             <li><a class="menu-bars" href="#"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
                         </ul>
-                    </nav>
+                    </nav> -->
                 </div>
             </div>
             
             <div class="header__content">
-                <p class="bold">Bienvenido Instructor!</p>
+                <p class="bold">¡Bienvenido Instructor!</p>
                 <p>Una manera ágil y sencilla de registrar su actividad.</p>
                 <a class="btn scroll" href="login.php">Ingresar</a>
             </div>
@@ -67,7 +68,7 @@
     </header>
     
     <section id="about">
-        <div class="container">
+        <div class="container quienes-somos">
             <h2>Quienes Somos</h2>
             <hr>
             <img src="img/icons8-company-100.png" alt="Photo Cyril">
@@ -131,7 +132,7 @@
     </section> -->
     
     <section id="portfolio">
-        <h2>Sede las Tecnologías de la Información y las Comunicaciones</h2>
+        <h2 style="font-size: 25px">Sede las Tecnologías de la Información y las Comunicaciones</h2>
         <hr>
         <div class="container">
             <div class="portfolio__projects">
