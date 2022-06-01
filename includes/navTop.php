@@ -10,12 +10,13 @@
             <div class="uk-navbar-right uk-light">
                 <ul class="uk-navbar-nav">
                     <li class="uk-active">
-                        <a href="#"><?php echo $usuario['nombre'];?> &nbsp;<span uk-icon="chevron-down"></span></a>
+                        <a href="#"><span uk-icon="chevron-down"></span></a>
                         <div uk-dropdown="pos: bottom-right; mode: click; offset: -17;">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li class="uk-nav-header">Opciones</li>
+                                <li class="uk-nav-header"><?php echo $usuario['nombre'];?> &nbsp;</li>
+                                <!-- <li class="uk-nav-header">Opciones</li> -->
                                 <li><a href="#">Editar Perfil</a></li>
-                                <li class="uk-nav-header">Acciones</li>
+                                <!-- <li class="uk-nav-header">Acciones</li> -->
                                 <li><a href="../index.html">Cerrar sesión</a></li>
                             </ul>
                         </div>

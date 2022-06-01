@@ -31,7 +31,7 @@
 .uk-nav .uk-nav-header {
     font-size: 20px;
     font-weight: 700;
-    color: white;
+    color: #111b49;
 }
 
 .uk-breadcrumb li {
@@ -162,8 +162,12 @@ h2 {
 }
 
 .buttons .button{
-    width: 30%;
+    /* width: 30%; */
     margin-top: 10px;
+}
+
+.uk-section-small{
+    margin: 0 10%;
 }
 
 .hiddenInput{
@@ -173,6 +177,16 @@ h2 {
 .bold{
     font-weight: bold;
     font-size: 15px;
+}
+
+.tabla{
+    display: flex;
+    justify-content: center;
+
+}
+
+h1{
+    text-align: center;
 }
 
 @media(max-width: 960px) {
@@ -210,3 +224,15 @@ h2 {
         margin-left: 300px;
     }
 }
+
+@media (max-width:576px){
+    .uk-section-small{
+        margin: 0 20px;
+    }
+}
+
+@media (max-width: 315px) {
+    .uk-logo{
+        font-size:20px;
+    }              
+  }
