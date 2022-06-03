@@ -189,6 +189,7 @@ h1{
     text-align: center;
 }
 
+
 @media(max-width: 960px) {
     .tm-sidebar-left {
         opacity: 0;

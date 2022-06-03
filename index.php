@@ -27,12 +27,54 @@
             </ul>
         </nav>
     </div> -->
-   
+   <style>
+       .list-menu{
+           display:flex
+               
+       }
+
+       .link-menu:hover{
+            text-decoration:none;
+       }
+
+       .toggle{
+           background:none;
+           border:none;
+           color:#b7ff00;
+           display: none;
+           cursor:pointer;
+       }
+
+
+    @media only screen and (max-width:768px) {
+        .list-menu{
+            flex-direction: column;
+            align-items:center;
+            background-color: black;
+            position:fixed;
+            left: 0;
+            top: 110px;
+            width:100%;
+            padding: 20px 0;
+            
+            left: -100%;
+            transition: left 0.3s
+        }
+
+        .list-menu_visible{
+            left:0
+        }
+
+        .toggle{
+            display: block
+        }
+    }
+   </style>
     <header>
         <div class="container">
             <div class="row">
                 <div class="header__top">
-                    <div class="col-md-6 header__top-brand">
+                    <div class="col-md-6 header__top-brand ">
                         <h1><span class="bold">Ingreso</span> Sena</h1>
                         <hr>       
                     </div>
@@ -51,6 +93,15 @@
                             <li><a class="menu-bars" href="#"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
                         </ul>
                     </nav> -->
+                    <nav class="menu">
+                    <button class="toggle"><i class="fa fa-bars" aria-hidden="true"></i></button>
+                        <ul class="list-menu"  style="list-style:none;">
+                        
+                            <li class="item-menu p-3"><a class="link-menu text-white" href="#">Nosotros</a></li>
+                            <li class="item-menu p-3"><a class="link-menu text-white" href="login.php">Ingresos</a></li>
+                            <li class="item-menu p-3"><a class="link-menu text-white" href="#">Inicio</a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
             
@@ -219,6 +270,15 @@
     <section id="footer">
         <p>Made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">Carlitos Garcia</a> <i class="fa fa-copyright" aria-hidden="true"></i>2022</p>
     </section>
+
+    <script>
+        const navToggle = document.querySelector(".toggle");
+        const navMenu = document.querySelector(".list-menu");
+
+        navToggle.addEventListener("click", () =>{
+            navMenu.classList.toggle("list-menu_visible");
+        });
+    </script>
 
 <!-- partial -->
   <script src="js/alerta.js"></script>  
