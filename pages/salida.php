@@ -1,3 +1,52 @@
+<?php
+    include("../includes/conexion.php");
+    session_start();
+    if (!isset($_SESSION['idUser'])) {
+        header("Location: ../index.html");
+    }
+    $cedula=$_SESSION['idUser'];
+    include("../includes/rellenar_datos_usuario.php");
+    $time= mysqli_query($con,"SELECT CURRENT_TIME();");
+    if (!$time) {
+        die("ERROR AL CONSULTAR HORA");
+    }
+    $horaActual= mysqli_fetch_array($time)['CURRENT_TIME()'];
+    $alerta=null;
+
+    $nombres=null;
+    $correo=null;
+    $sede=$usuario['sede'];
+    
+    $motivo=null;
+
+    $vehiculo=null;
+    $dispositivosIngresados=null;
+    if (isset($_POST['btnadd'])){
+
+    }else if(isset($_POST['btncancel'])){
+       
+    }else if(isset($_POST['ingresar'])){
+
+        /* if (isset($_POST['nombres']) && isset($_POST['correo'])) {
+            $nombres=$_POST['nombres'];
+            $correo=$_POST['correo'];
+            $sede=$_POST['sede'];
+            if ($sede!="ninguno") {
+                if ($sede!="Sede TIC") {
+                    if ($_POST["motivo"]=="") {
+                        $alerta="Debe especificar el motivo de su visita al nodo!";
+                    }
+                }
+                if (!isset($alerta)) {
+                    $motivo=$_POST["motivo"];
+                }
+            }else{
+                $alerta="Debe seleccionar sede o nodo al que pertenece!";
+            }
+        } */
+
+    }
+?>
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -10,36 +59,9 @@
 </head>
 <body>
 <!-- partial:index.partial.html -->
-<div uk-sticky class="uk-navbar-container tm-navbar-container uk-active uk-light">
-    <div class="uk-container uk-container-expand">
-        <nav uk-navbar>
-            <div class="uk-navbar-left">
-                <a id="sidebar_toggle" class="uk-navbar-toggle" uk-navbar-toggle-icon></a>
-                <a href="#" class="uk-navbar-item uk-logo">
-                    Ingresos Sena
-                </a>
-            </div>
-            <div class="uk-navbar-right uk-light">
-                <ul class="uk-navbar-nav">
-                    <li class="uk-active">
-                        <a href="#"><span uk-icon="chevron-down"></span></a>
-                        <div uk-dropdown="pos: bottom-right; mode: click; offset: -17;">
-                            <ul class="uk-nav uk-navbar-dropdown-nav">
-                                <li><a href="#">Carlos Garcia &nbsp</a></li>
-                                <!-- <li class="uk-nav-header">Opciones</li> -->
-                                <li><a href="#">Editar Perfil</a></li>
-                                <!-- <li class="uk-nav-header">Acciones</li> -->
-                                <li><a href="../index.html">Cerrar sesión</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-</div>
-
-<div id="sidebar" class="tm-sidebar-left uk-background-default">
+<?php include("../includes/navTop.php");?>
+<?php include("../includes/navLateral.php");?>
+<!-- <div id="sidebar" class="tm-sidebar-left uk-background-default">
     <div class="user">
         <img id="avatar" width="100" class="uk-border-circle" src="../img/usuario.png" />
         <div class="uk-margin-top"></div>
@@ -61,6 +83,7 @@
 
     </ul>
 </div>
+ -->
 
 <div class="content-padder content-background">
     <div class="uk-section-small uk-section-default header">

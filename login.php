@@ -140,7 +140,7 @@
 				<form class="sign-in-htm spaceTop" action="" method="POST">
 					<div class="group">
 						<label for="user" class="label">Numero de documento</label>
-						<input id="user" type="text" class="input" name="cedula" value="<?php if(isset($docum)) echo $docum ?>">
+						<input id="user" type="text" class="input" name="cedula" maxlength="12" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="<?php if(isset($docum)) echo $docum ?>">
 					</div>
 					<div class="group">
 						<label for="pass" class="label">Contraseña</label>
@@ -170,7 +170,7 @@
 				<form class="sign-up-htm spaceTop" action="" method="POST">
 					<div class="group">
 						<label for="cedula" class="label">Numero de identificacion</label>
-						<input id="cedula" type="text" class="input" name="cedular" value="<?php if(isset($cedul)) echo $cedul?>">
+						<input id="cedula" type="text" class="input" name="cedular" maxlength="12" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="<?php if(isset($docum)) echo $docum ?>" value="<?php if(isset($cedul)) echo $cedul?>">
 					</div>
 					<div class="group">
 						<label for="user" class="label">Nombre Completo</label>

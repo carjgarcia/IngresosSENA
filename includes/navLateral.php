@@ -13,9 +13,9 @@
         <li class="uk-nav-header">
             Instructor
         </li>
-        <li><a href="../home.html"><button class="btn btn-light">Inicio</button></a></li>
-        <li><a href="ingreso.html"><button class="btn btn-success">Ingreso</button></a></li>
-        <li><a href="salida.html"><button class="btn btn-warning">Salida</button></a></li>  
+        <li><a href="#"><button class="btn btn-light">Inicio</button></a></li>
+        <li><a href="../pages/ingreso.php"><button class="btn btn-success">Ingreso</button></a></li>
+        <li><a href="../pages/salida.php"><button class="btn btn-warning">Salidaaa</button></a></li>  
         <li><a href=""><button class="btn btn-danger">Cerrar Sesión</button></a></li>
 
     </ul>
