@@ -33,9 +33,15 @@
             $_SESSION['dispositivos']=array();
         }
 
-
+        $_SESSION['dispositivos'][]=array(
+            "dispositivo"=>$dispositivos,
+            "marca"=>$marca,
+            "serial"=>$serial,
+            "placa"=>$placa,
+            "uso"=>$uso,
+            "cantidad"=>$cantidad
+        );
     }
-    
 ?>
 <!DOCTYPE html>
 <html lang="en" >
@@ -211,43 +217,38 @@
                             Cancelar
                         </button>
                     </div>
-                    <br>
+            </form>
+            </div>
+            <br>
                     <?php if(isset($_SESSION['dispositivos'])):?>
                         <div class="tabla">
                         <table class="table">
                             <thead class="thead-ingreso">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Tipo</th>
-                                <th scope="col">Placa o Serial</th>
+                                <th scope="col">Dispositivo</th>
+                                <th scope="col">Marca</th>
+                                <th scope="col">Serial</th>
+                                <th scope="col">Propietario</th>
                                 <th scope="col">Accion</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Telefono</td>
-                                <td>16262545</td>
-                                <td class="text-center"><button type="button" class="btn">Quitar</button>
-                                </td>
-                            </tr>
+                                <?php foreach ($_SESSION['dispositivos'] as $key => $value):?>
+                                    <tr>
+                                        <th scope="row"><?php echo $key+1;?></th>
+                                        <td><?php echo $value['dispositivo'];?></td>
+                                        <td><?php echo $value['marca'];?></td>
+                                        <td><?php echo $value['serial'];?></td>
+                                        <td><?php echo $value['uso'];?></td>
+                                        <td class="text-center"><button type="button" class="btn">Quitar</button>
+                                        </td>
+                                    </tr>
+                                <?php endforeach;?>
                             </tbody>
                         </table>
                         </div>
                     <?php endif;?>
-            </form>
-                
-            </div>
-            <!-- <div class="mb-3">
-                <label for="autoriza" class="form-label">Autoriza</label>
-                <select class="form-select" aria-label="Default select example" id="autoriza">
-                    <option selected value="sena">Autoriza</option>
-                    <option value="sena">Manuel Hormechea</option>
-                    <option value="personal">Giovanni Zarco</option>
-                    <option value="personal">Esther Ramirez</option>
-                    <option value="personal">Jorge solano</option>
-                </select>
-            </div> -->
             <div class="mb-3">
                 <label for="fecha" class="form-label">Fecha Actual</label>
                 <input type="text" class="form-control" id="fecha" value="<?php echo date('Y-d-m');?>" name="fechaActual" readonly>
