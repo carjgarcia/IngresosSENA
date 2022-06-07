@@ -12,6 +12,14 @@ body{
 .camara {
     background-color: antiquewhite;
     height: 100vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#preview {
+    height: 500px;
+    width: 700px;
 }
 
 .contenedor {
