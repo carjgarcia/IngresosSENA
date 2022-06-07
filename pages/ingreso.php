@@ -13,59 +13,29 @@
     $horaActual= mysqli_fetch_array($time)['CURRENT_TIME()'];
     $alerta=null;
 
-    $nombres=null;
+    /* Datos Personales */
+    $nombre=null;
     $correo=null;
-    $sede=$usuario['sede'];
-    
+    $sede=null;
+    /* Informacion de Ingreso */
     $motivo=null;
+    $vehículo=null;
+    /*  Dispositivos */
+    if (isset($_POST['btnadd'])) {
+        $dispositivos=$_POST['dispositivo'];
+        $marca=$_POST['marca'];
+        $serial=$_POST['serial'];
+        $placa=$_POST['placa'];
+        $uso=$_POST['uso'];
+        $cantidad=$_POST['cantidad'];
 
-    $vehiculo=null;
-    $dispositivosIngresados=null;
-    if (isset($_POST['btnadd'])){
+        if (!isset($_SESSION['dispositivos'])) {
+            $_SESSION['dispositivos']=array();
+        }
 
-    }else if(isset($_POST['btncancel'])){
-       
-    }else if(isset($_POST['ingresar'])){
-
-        /* if (isset($_POST['nombres']) && isset($_POST['correo'])) {
-            $nombres=$_POST['nombres'];
-            $correo=$_POST['correo'];
-            $sede=$_POST['sede'];
-            if ($sede!="ninguno") {
-                if ($sede!="Sede TIC") {
-                    if ($_POST["motivo"]=="") {
-                        $alerta="Debe especificar el motivo de su visita al nodo!";
-                    }
-                }
-                if (!isset($alerta)) {
-                    $motivo=$_POST["motivo"];
-                }
-            }else{
-                $alerta="Debe seleccionar sede o nodo al que pertenece!";
-            }
-        } */
 
     }
-
-    $arreglo=array();
-
-        if(isset($_POST['marca'])){
-            $tipo=$_POST['dispositivo'];
-            $serial=$_POST['serial'];
-            $placa=$_POST['placa'];
-            $marca=$_POST['marca'];
-            $uso=$_POST['uso'];
-            $cantidad=$_POST['cantidad'];
-
-            $arreglo=array(
-                "placa" => $placa,
-                "tipo" => $tipo
-            );
-            var_dump($arreglo);
-        
-    }
-
-
+    
 ?>
 <!DOCTYPE html>
 <html lang="en" >
@@ -224,7 +194,7 @@
                         <label for="cantidad" class="form-label">Cantidad</label>
                         <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Digite la cantidad">
                     </div>
-                    
+                        
                     <div class="d-grid gap-2 d-md-block text-center">
                         <button class="btn btn-success" type="submit" name="btnadd">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -242,38 +212,32 @@
                         </button>
                     </div>
                     <br>
-                    <div class="tabla">
-                    <table class="table">
-                        <thead class="thead-ingreso">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tipo</th>
-                            <th scope="col">Placa o Serial</th>
-                            <th scope="col">Accion</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Telefono</td>
-                            <td>16262545</td>
-                            <td class="text-center"><button type="button" class="btn">Quitar</button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    </div>
+                    <?php if(isset($_SESSION['dispositivos'])):?>
+                        <div class="tabla">
+                        <table class="table">
+                            <thead class="thead-ingreso">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Placa o Serial</th>
+                                <th scope="col">Accion</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Telefono</td>
+                                <td>16262545</td>
+                                <td class="text-center"><button type="button" class="btn">Quitar</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    <?php endif;?>
             </form>
                 
             </div>
-
-            <?php if(isset($_SESSION['dispositivos'])):?>
-            <div class="mb-3">
-                <label for="cantidad" class="form-label">Mis dispositivos</label>
-                <textarea name="" id="" class="form-control" cols="30" rows="6"></textarea>
-            </div>
-            <?php endif;?>
-            
             <!-- <div class="mb-3">
                 <label for="autoriza" class="form-label">Autoriza</label>
                 <select class="form-select" aria-label="Default select example" id="autoriza">
