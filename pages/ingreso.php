@@ -235,13 +235,13 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($_SESSION['dispositivos'] as $key => $value):?>
-                                    <tr>
+                                    <tr pos="<?php echo $key;?>">
                                         <th scope="row"><?php echo $key+1;?></th>
                                         <td><?php echo $value['dispositivo'];?></td>
                                         <td><?php echo $value['marca'];?></td>
                                         <td><?php echo $value['serial'];?></td>
                                         <td><?php echo $value['uso'];?></td>
-                                        <td class="text-center"><button type="button" class="btn">Quitar</button>
+                                        <td class="text-center"><button type="button" class="btn" id="btnQuitarDis">Quitar</button>
                                         </td>
                                     </tr>
                                 <?php endforeach;?>
@@ -273,7 +273,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.23/js/uikit-icons.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js'></script><script  src="../js/home.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="../js/ingreso.js"></script>
-
 </body>
 </html>

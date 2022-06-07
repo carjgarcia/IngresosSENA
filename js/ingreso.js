@@ -31,6 +31,17 @@ dispo.addEventListener("change", function () {
   }else{
     document.querySelector('#dispositivoDiv').style.display="none";
   }
-
-
 });
+
+$(document).on('click','#btnQuitarDis',function(){
+  let element = $(this)[0].parentElement.parentElement;
+  let id = $(element).attr('pos');
+  $.ajax({
+    url:'../includes/eliminarRegistro.php',
+    type: 'POST',
+    data: {id},
+    success: function(resp){
+      console.log(resp);
+    }
+  })
+})
