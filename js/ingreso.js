@@ -41,7 +41,7 @@ $(document).on('click','#btnQuitarDis',function(){
     type: 'POST',
     data: {id},
     success: function(resp){
-      console.log(resp);
+      location.reload();
     }
   })
 })

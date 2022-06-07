@@ -13,10 +13,6 @@
     $horaActual= mysqli_fetch_array($time)['CURRENT_TIME()'];
     $alerta=null;
 
-    /* Datos Personales */
-    $nombre=null;
-    $correo=null;
-    $sede=null;
     /* Informacion de Ingreso */
     $motivo=null;
     $vehículo=null;
@@ -41,6 +37,22 @@
             "uso"=>$uso,
             "cantidad"=>$cantidad
         );
+    }
+
+    if (isset($_POST['btncancel'])) {
+        header("Location: ingreso.php");
+    }
+
+    if (isset($_POST['ingresar'])) {
+        /* Datos Personales */
+        $nombre=$_POST['nombres'];
+        $correo=$_POST['correo'];
+        $sede=$_POST['sede'];
+        /* Informacion de Ingreso */
+        $motivo=null;
+        if ($sede!="Sede TIC") {
+            $motivo=$_POST['motivo'];
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -114,13 +126,6 @@
 
             <div class="mb-3">
                 <label for="" class="form-label">¿Trajo vehículo?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                <!-- <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio3" autocomplete="off" checked>
-                    <label class="btn btn-outline-primary" for="btnradio3">SI</label>
-                  
-                    <input type="radio" class="btn-check" name="btnradio2" id="btnradio4" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="btnradio4">NO</label>
-                </div> -->
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                     <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
                     <label class="btn btn-outline-danger" for="btnradio1">SI</label>
@@ -149,7 +154,7 @@
                         <td>16262545</td>
                         <td class="text-center"><button type="button" class="btn">Ingresar</button>
                         </td>
-                    </tr>
+                    </tr>   
                     </tbody>
                 </table>
             </div>
@@ -234,9 +239,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($_SESSION['dispositivos'] as $key => $value):?>
+                                <?php
+                                    $num=1; 
+                                    foreach ($_SESSION['dispositivos'] as $key => $value):
+                                ?>
                                     <tr pos="<?php echo $key;?>">
-                                        <th scope="row"><?php echo $key+1;?></th>
+                                        <th scope="row"><?php echo $num;?></th>
                                         <td><?php echo $value['dispositivo'];?></td>
                                         <td><?php echo $value['marca'];?></td>
                                         <td><?php echo $value['serial'];?></td>
@@ -244,7 +252,10 @@
                                         <td class="text-center"><button type="button" class="btn" id="btnQuitarDis">Quitar</button>
                                         </td>
                                     </tr>
-                                <?php endforeach;?>
+                                <?php
+                                    $num++; 
+                                   endforeach;
+                                ?>
                             </tbody>
                         </table>
                         </div>
