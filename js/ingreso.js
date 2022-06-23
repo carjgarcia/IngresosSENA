@@ -45,3 +45,35 @@ $(document).on('click','#btnQuitarDis',function(){
     }
   })
 })
+
+/*FUNCION PARA CAPTURAR Y MOSTRAR LOS DATOS DEL FORMULARIO EN LA CONSOLA*/
+
+function imprimirDatos() {
+  const id = document.getElementById('idDocumento').value;
+  const nombre = document.getElementById('nombres').value;
+  const correo = document.getElementById('correo').value;
+  const sede = document.getElementById('sede').value;
+  /*Extraer el valor seleccionado de los radio buttons a través de un query con CSS*/
+  const vehiculo = document.querySelector('input[name="vehiculo"]:checked').value;
+
+  /*Manipulación de la tabla*/
+  let articulos = [];
+  let tabla = document.getElementById('tablaDispositivos');
+  let filas = tabla.getElementsByTagName('tbody')[0];
+  let numFilas = filas.children.length;
+  // let columnas = tabla.querySelectorAll('tr th');
+  // let numCol = columnas.length;
+  for (let i = 1; i <= numFilas; i++) {
+    let fila = tabla.rows[i].getElementsByTagName('td');
+    let dispositivo = [];
+    for (const celda of fila) {
+      dispositivo.push(celda.innerHTML);
+    }
+    articulos.push(dispositivo);
+  }
+
+  const fecha = document.getElementById('fecha').value;
+  const hora = document.getElementById('hora').value;
+
+  console.log(id, nombre, correo, sede, vehiculo, articulos, fecha, hora);
+}

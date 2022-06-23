@@ -89,7 +89,7 @@
 
             <div class="mb-3">
                 <label for="Correo" class="form-label">Correo electronico</label>
-                <input type="email" class="form-control" id="Correo" name="correo" value="<?php echo $usuario['correo'];?>" required>
+                <input type="email" class="form-control" id="correo" name="correo" value="<?php echo $usuario['correo'];?>" required>
             </div>
 
             <div class="mb-3">
@@ -122,10 +122,10 @@
                     <label class="btn btn-outline-primary" for="btnradio4">NO</label>
                 </div> -->
                 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
+                    <input type="radio" class="btn-check" name="vehiculo" value="Si" id="btnradio1" autocomplete="off">
                     <label class="btn btn-outline-danger" for="btnradio1">SI</label>
                   
-                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" checked>
+                    <input type="radio" class="btn-check" name="vehiculo" value="No" id="btnradio2" autocomplete="off" checked>
                     <label class="btn btn-outline-danger" for="btnradio2">NO</label>
                   </div>
             </div>
@@ -133,7 +133,7 @@
             <h4>Tus Ingresos Sena</h4>
 
             <div class="tabla">
-                <table class="table">
+                <table class="table" id="tablaDispositivos">
                     <thead class="thead-ingreso">
                     <tr>
                         <th scope="col">#</th>
@@ -174,7 +174,7 @@
                 <div class="form-group hiddenInput" id="dispositivoDiv">
                     <div class="mb-3">
                         <label for="marca" class="form-label">Marca del dispositivo</label>
-                        <input type="text" class="form-control" id="marca" name="marca" placeholder="Digite el código del artículo">
+                        <input type="text" class="form-control" id="marca" name="marca" placeholder="Digite la marca del artículo">
                     </div>
 
                     <div class="mb-3">
@@ -198,7 +198,7 @@
 
                     <div class="mb-3">
                         <label for="cantidad" class="form-label">Cantidad</label>
-                        <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Digite la cantidad">
+                        <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad">
                     </div>
                         
                     <div class="d-grid gap-2 d-md-block text-center">
@@ -261,6 +261,10 @@
 
             <div class="mb-3 buttons">
                 <button type="submit" class="btn btn-primary button" id="btnIngresar" name="ingresar">Ingresar</button>
+            </div>
+
+            <div>
+                <button id="prueba" onclick="imprimirDatos()">IMPRIMIR DATOS</button>
             </div>
 
 
