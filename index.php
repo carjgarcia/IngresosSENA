@@ -34,6 +34,7 @@
                 <div class="header__top">
                     <div class="col-md-6 header__top-brand">
                         <h1><span class="bold">Ingreso</span> Sena</h1>
+                        <button id="btnPrueba">ALERTA DE PRUEBA</button>
                         <hr>       
                     </div>
                     <!-- <nav class="col-md-6 header__top-nav hidden-md-down">
@@ -41,7 +42,7 @@
                             <li><a class="scroll" href="#">Inicio</a></li>
                             <li><a class="scroll" href="#about">Nosotros</a></li>
                             <li><a class="scroll" href="login.php">Ingresar</a></li>
-                            <button id="btnPrueba">ALERTA DE PRUEBA</button>
+                            
                             
                             
                         </ul>
