@@ -43,7 +43,6 @@ $(document).on('click','#btnQuitarDis',function(){
 
 /*FUNCION PARA CAPTURAR Y MOSTRAR LOS DATOS DEL FORMULARIO EN LA CONSOLA*/
 $('#imprimir').on('click',function(event){
-  event.preventDefault();
   const id = document.getElementById('idDocumento').value;
   const nombre = document.getElementById('nombres').value;
   const correo = document.getElementById('correo').value;
@@ -68,26 +67,19 @@ $('#imprimir').on('click',function(event){
   const fecha = document.getElementById('fecha').value;
   const hora = document.getElementById('hora').value;
 
-  console.log(id,nombre,correo,sede,vehiculo,articulos,fecha,hora);
+  console.log(id);
+  console.log(nombre);
+  console.log(correo);
+  console.log(sede);
+  console.log(vehiculo);
+  console.log(dispositivos);
+  console.log(fecha);
+  console.log(hora);
+
+  event.preventDefault(); 
 });
 
 let dispositivos= [
-  // {
-  //   "Producto":"Celular",
-  //   "Marca":"Nokia",
-  //   "Serial":"123",
-  //   "Placa":"ABC",
-  //   "Propietario":"SENA",
-  //   "Cantidad":"1"
-  // },
-  // {
-  //   "Producto":"Tablet",
-  //   "Marca":"Lg",
-  //   "Serial":"456",
-  //   "Placa":"DEF",
-  //   "Propietario":"SENA",
-  //   "Cantidad":"1"
-  // }
 ],posicionSeleccionada=null;
 
 function imprimirRegistros(valores) {
@@ -102,7 +94,7 @@ function imprimirRegistros(valores) {
             <td>${element.Placa}</td>
             <td>${element.Propietario}</td>
             <td>${element.Cantidad}</td>  
-            <td><button style="cursor: pointer" onclick="eliminarRegistro(${i})">Eliminar</button></td>  
+            <td><button style="cursor: pointer" onclick="eliminarRegistro(${i})" class="btn btn-outline-danger">Eliminar</button></td>  
       </tr>
     `;
     i++;
@@ -123,17 +115,48 @@ $('#agregar').on('click',function(event){
   let propietario=$('#propietario').val();
   let cantidad=$('#cantidad').val();
 
-  dispositivos[dispositivos.length]={
-    "Producto":dispo,
-    "Marca":marca,
-    "Serial":serial,
-    "Placa":placa,
-    "Propietario":propietario,
-    "Cantidad":cantidad
-  };
+  let otrodispositivo= $('#otrodis').val();
 
-  imprimirRegistros(dispositivos);
-  limpiarcampos();
+  if (
+    dispo!="ninguno" &&  marca!="" &&  serial!="" &&  propietario!="propietario" &&  cantidad!=""
+  ) {
+    var registrar=true;
+    if (dispo=="otro") {
+      if (otrodispositivo=="") {
+        Swal.fire({
+          title: 'Información',
+          text: 'Debe especificar el dispositivo que desea registrar!',
+          icon: 'info',   
+          confirmButtonText: 'Entendido'
+        });
+        registrar=false;
+      }else{
+        registrar=true;
+      }
+    }else{
+      registrar=true;
+    }
+
+    if (registrar) {
+      dispositivos[dispositivos.length]={
+        "Producto": dispo=="otro" ? otrodispositivo : dispo,
+        "Marca":marca,
+        "Serial":serial,
+        "Placa":placa,
+        "Propietario":propietario,
+        "Cantidad":cantidad
+      };
+      imprimirRegistros(dispositivos);
+      limpiarcampos();
+    }
+  }else{
+    Swal.fire({
+      title: 'Información',
+      text: 'Por favor especificar los campos obligatorios para registrar dispositivos!',
+      icon: 'info',   
+      confirmButtonText: 'Entendido'
+    });
+  }
 
 });
 
@@ -194,60 +217,22 @@ $('#limpiar').on('click',function(event){
 
 //LIMPIAR CAMPOS (FUNCIÓN)
 function limpiarcampos() {
-  $("#dispositivos").val(null);
+  $("#dispositivos").val("ninguno");
   $('#marca').val(null);
   $('#serial').val(null);
   $('#placa').val(null);
-  $('#propietario').val(null);
+  $('#propietario').val("propietario");
   $('#cantidad').val(null);
+  $('#otrodis').val(null);
   posicionSeleccionada=null;
 }
-
-
-//SISTEMA DE ALERTAS
-/* const boton = document.querySelector('#formulario');
-boton.addEventListener('submit', ingresar);
-
-function ingresar(e){
-  e.preventDefault();
-  const documento = document.querySelector('#idDocumento').value;
-  const nombresss = document.querySelector('#nombresss').value;
-  const correo = document.querySelector('#correo').value;
-  const sede = document.querySelector('#sede').value;
-  const motivo = document.querySelector('#motivo').value;
-
-  const dispo = document.querySelector('#dispositivos').value;
-  const marca = document.querySelector('#marca').value;
-  const serial = document.querySelector('#serial').value;
-  const placa = document.querySelector('#placa').value;
-  const propietario = document.querySelector('#propietario').value;
-  const cantidad = document.querySelector('#cantidad').value;
-
-  const fecha = document.querySelector('#fecha').value;
-  const hora = document.querySelector('#hora').value;
-  
-  if(nombresss === ""){
-    Swal.fire({
-      title: 'Error',
-      text: 'Campo es obligatorio',
-      icon: 'error',
-      confirmButtonText: 'Confirmar'
-    });
-  }else{
-    Swal.fire({
-      title: `${valor}`,
-      text: 'Bienvenido al consultorio',
-      icon: 'success',
-      confirmButtonText: 'Confirmar'
-    });
-  }
-} */
 
 const boton = document.getElementById('ingresar');
 boton.addEventListener('click', aplicar);
 
 function aplicar(e){
   e.preventDefault();
+  
   // let documento = document.querySelector('#idDocumento').value;
   let documento = document.querySelector('#idDocumento').value;
   let nombres = document.querySelector('#nombres').value;
@@ -255,40 +240,49 @@ function aplicar(e){
   let sede = document.querySelector('#sede').value;
   let motivo = document.querySelector('#motivo').value;
 
-  console.log(sede);
-  let dispo = document.querySelector('#dispositivos').value;
-  let marca = document.querySelector('#marca').value;
-  let serial = document.querySelector('#serial').value;
-  let placa = document.querySelector('#placa').value;
-  let propietario = document.querySelector('#propietario').value;
-  let cantidad = document.querySelector('#cantidad').value;
-
   let fecha = document.querySelector('#fecha').value;
   let hora = document.querySelector('#hora').value;
-  
 
-  if(sede!="Sede TIC" && motivo==""){
+  if(sede=="select"){
+    Swal.fire({
+      title: 'Información',
+      text: 'Por favor seleccionar la sede a la que pertenece',
+      icon: 'info',   
+      confirmButtonText: 'Entendido'
+    });
+  }else if(sede!="Sede TIC" && motivo==""){
     Swal.fire({
       title: 'Información',
       text: 'Por favor especifique el motivo de su visita',
       icon: 'info',   
       confirmButtonText: 'Entendido'
     });
-  }else{
-    if(documento===""||nombres===""||correo===""||sede===""||fecha===""||hora===""){
+  }else  if(documento===""||nombres===""||correo===""||sede===""||fecha===""||hora===""){
       Swal.fire({
         title: 'Error!',
         text: 'Hay campos sin llenar',
         icon: 'danger',
         confirmButtonText: 'Entendido'
       });
-     }else{
-      Swal.fire({
-        title: '¡Genial!',
-        text: 'Bienvenido al sistema',
-        icon: 'success',
-        confirmButtonText: 'Continuar'
-      }); 
-     }
-    }
+  }else{
+    console.log(fecha);
+    $.ajax({
+      url:'../ajaxphp/registrar_ingreso.php',
+      type:'POST',
+      data:{documento,nombres,correo,sede,motivo,dispositivos,fecha,hora},
+      success: function(resp){
+        setTimeout(() => {
+          window.location.href="../generarCodigoQR/index.php"
+        }, 1500);
+        
+        Swal.fire({
+          title: '¡Genial!',
+          text: 'Bienvenido al sistema',
+          icon: 'success',
+          confirmButtonText: 'Continuar'
+        }); 
+      }
+    })
+  }
+
   }

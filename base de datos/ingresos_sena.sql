@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-05-2022 a las 22:16:11
--- Versión del servidor: 10.4.20-MariaDB
--- Versión de PHP: 8.0.8
+-- Tiempo de generación: 28-06-2022 a las 23:02:43
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,27 +28,23 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `dispositivos` (
-  `id_dis` bigint(20) NOT NULL,
-  `serial` varchar(50) NOT NULL,
-  `placa` varchar(50) NOT NULL,
-  `marca` varchar(50) NOT NULL,
-  `uso` varchar(30) NOT NULL,
-  `cantidad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+  `id_dispositivos` bigint(20) NOT NULL,
+  `dispositivo` varchar(50) NOT NULL,
+  `serial` varchar(50) DEFAULT NULL,
+  `placa` varchar(50) DEFAULT NULL,
+  `marca` varchar(50) DEFAULT NULL,
+  `cantidad` bigint(20) DEFAULT NULL,
+  `propiedad` varchar(50) DEFAULT NULL,
+  `autoriza` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Estructura de tabla para la tabla `estado_ingreso`
+-- Volcado de datos para la tabla `dispositivos`
 --
 
-CREATE TABLE `estado_ingreso` (
-  `id_estado` bigint(20) NOT NULL,
-  `hora` time NOT NULL DEFAULT current_timestamp(),
-  `estado` varchar(50) NOT NULL,
-  `autoriza` varchar(50) NOT NULL,
-  `idIngreso` varchar(7) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `dispositivos` (`id_dispositivos`, `dispositivo`, `serial`, `placa`, `marca`, `cantidad`, `propiedad`, `autoriza`) VALUES
+(13, 'portatil', '12312412', 'asdase1221', 'Samsung', 1, 'sena', NULL),
+(14, 'celular', '123456789', 'dasdq', 'Dell', 1, 'personal', NULL);
 
 -- --------------------------------------------------------
 
@@ -57,22 +53,40 @@ CREATE TABLE `estado_ingreso` (
 --
 
 CREATE TABLE `ingreso` (
-  `idIngreso` varchar(7) NOT NULL,
-  `fecha` date NOT NULL DEFAULT current_timestamp(),
+  `codigo_ingreso` bigint(20) NOT NULL,
+  `fecha` date DEFAULT NULL,
+  `hora` time DEFAULT NULL,
+  `estado` varchar(50) DEFAULT NULL,
+  `motivo` varchar(50) NOT NULL,
   `cedula` varchar(12) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ingreso`
+--
+
+INSERT INTO `ingreso` (`codigo_ingreso`, `fecha`, `hora`, `estado`, `motivo`, `cedula`) VALUES
+(1210, '2022-06-28', '15:12:13', 'INGRESO', '', '123456789');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ingreso_dispositivo`
+-- Estructura de tabla para la tabla `ingresodispositivo`
 --
 
-CREATE TABLE `ingreso_dispositivo` (
-  `id_ingresdis` bigint(20) NOT NULL,
-  `id_dis` bigint(20) DEFAULT NULL,
-  `idIngreso` varchar(7) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `ingresodispositivo` (
+  `iddis` bigint(20) NOT NULL,
+  `id_dispositivos` bigint(20) DEFAULT NULL,
+  `codigo_ingreso` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ingresodispositivo`
+--
+
+INSERT INTO `ingresodispositivo` (`iddis`, `id_dispositivos`, `codigo_ingreso`) VALUES
+(5, 13, 1210),
+(6, 14, 1210);
 
 -- --------------------------------------------------------
 
@@ -88,7 +102,14 @@ CREATE TABLE `usuarios` (
   `contrasena` varchar(50) NOT NULL,
   `sede` varchar(250) NOT NULL,
   `rol` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`idusu`, `cedula`, `nombres`, `correo`, `contrasena`, `sede`, `rol`) VALUES
+(1, '123456789', 'Brayan Jesús Charris Cantillo', 'bjcharris4@misena.edu.co', 'Sena2022', 'Sede TIC', 'instructor');
 
 --
 -- Índices para tablas volcadas
@@ -98,25 +119,19 @@ CREATE TABLE `usuarios` (
 -- Indices de la tabla `dispositivos`
 --
 ALTER TABLE `dispositivos`
-  ADD PRIMARY KEY (`id_dis`);
-
---
--- Indices de la tabla `estado_ingreso`
---
-ALTER TABLE `estado_ingreso`
-  ADD PRIMARY KEY (`id_estado`);
+  ADD PRIMARY KEY (`id_dispositivos`);
 
 --
 -- Indices de la tabla `ingreso`
 --
 ALTER TABLE `ingreso`
-  ADD PRIMARY KEY (`idIngreso`);
+  ADD PRIMARY KEY (`codigo_ingreso`);
 
 --
--- Indices de la tabla `ingreso_dispositivo`
+-- Indices de la tabla `ingresodispositivo`
 --
-ALTER TABLE `ingreso_dispositivo`
-  ADD PRIMARY KEY (`id_ingresdis`);
+ALTER TABLE `ingresodispositivo`
+  ADD PRIMARY KEY (`iddis`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -132,25 +147,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `dispositivos`
 --
 ALTER TABLE `dispositivos`
-  MODIFY `id_dis` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_dispositivos` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT de la tabla `estado_ingreso`
+-- AUTO_INCREMENT de la tabla `ingresodispositivo`
 --
-ALTER TABLE `estado_ingreso`
-  MODIFY `id_estado` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `ingreso_dispositivo`
---
-ALTER TABLE `ingreso_dispositivo`
-  MODIFY `id_ingresdis` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `idusu` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `ingresodispositivo`
+  MODIFY `iddis` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

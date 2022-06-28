@@ -7,10 +7,13 @@
     $cedula=$_SESSION['idUser'];
     include("../includes/rellenar_datos_usuario.php");
     $time= mysqli_query($con,"SELECT CURRENT_TIME();");
+
     if (!$time) {
         die("ERROR AL CONSULTAR HORA");
     }
     $horaActual= mysqli_fetch_array($time)['CURRENT_TIME()'];
+
+    
     $alerta=null;
 
     $nombres=null;
@@ -27,24 +30,23 @@
        
     }else if(isset($_POST['ingresar'])){
 
-        /* if (isset($_POST['nombres']) && isset($_POST['correo'])) {
-            $nombres=$_POST['nombres'];
-            $correo=$_POST['correo'];
-            $sede=$_POST['sede'];
-            if ($sede!="ninguno") {
-                if ($sede!="Sede TIC") {
-                    if ($_POST["motivo"]=="") {
-                        $alerta="Debe especificar el motivo de su visita al nodo!";
-                    }
-                }
-                if (!isset($alerta)) {
-                    $motivo=$_POST["motivo"];
-                }
-            }else{
-                $alerta="Debe seleccionar sede o nodo al que pertenece!";
-            }
-        } */
+    }
 
+    $result=mysqli_query($con,"SELECT codigo_ingreso FROM ingreso WHERE cedula='$cedula'");
+    if(!$result)die("ERROR".mysqli_error($con));
+    $codigoIngreso=null;
+    while($row = mysqli_fetch_array($result)){
+        $codigoIngreso=$row['codigo_ingreso'];
+    }
+
+    $sql = "SELECT dp.codigo_ingreso, d.dispositivo, d.serial, d.placa, d.marca, d.cantidad, d.propiedad, d.autoriza 
+    FROM ingresodispositivo as dp INNER JOIN dispositivos as d on dp.id_dispositivos=d.id_dispositivos WHERE dp.codigo_ingreso=$codigoIngreso;";
+    $result=mysqli_query($con, $sql);
+
+    $ingresosSalidas=array();
+    while($row = mysqli_fetch_array($result)){
+        $ingresosSalidas[]=array($row["codigo_ingreso"],$row["dispositivo"],$row["serial"],$row["placa"],$row["marca"],$row["cantidad"],$row["propiedad"],$row["autoriza"],
+        );
     }
 ?>
 <!DOCTYPE html>
@@ -103,16 +105,16 @@
 
             <div class="mb-3">
                 <label for="idDocumento" class="form-label">No. de documento</label>
-                <input type="text" class="form-control" id="idDocumento" readonly>
+                <input type="text" class="form-control" id="idDocumento" value="<?php echo $cedula?>" readonly>
             </div>
             <div class="mb-3">
                 <label for="nombres" class="form-label">Nombres Completo</label>
-                <input type="text" class="form-control" id="nombres" readonly>
+                <input type="text" class="form-control" id="nombres" value="<?php echo $usuario['nombre'];?>" readonly>
             </div>
 
             <div class="mb-3">
                 <label for="sede" class="form-label">Sede</label>
-                <input type="email" class="form-control" id="sede" readonly>
+                <input type="email" class="form-control" id="sede" value="<?php echo $usuario["sede"]; ?>" readonly>
             </div>
 
 
@@ -195,18 +197,30 @@
                     <thead class="thead-salida">
                         <tr>
                         <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th>Producto</th>
+                        <th>Serial</th>
+                        <th>Placa</th>
+                        <th>Marca</th>
+                        <th>Cantidad</th>
+                        <th>Propietario</th>
+                        <th>Autoriza</th>    
+                        <th>Accion</th>  
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <th scope="row">1</th>
-                        <td>Telefono</td>
-                        <td>16262545</td>
-                        <td class="text-center"><button type="button" class="btn btn-outline-dark">Quitar</button></td>
-                        </tr>
+                        <?php foreach ($ingresosSalidas as $value):?>
+                            <tr>
+                                <td><?php echo $value[0]?></td>
+                                <td><?php echo $value[1]?></td>
+                                <td><?php echo $value[2]?></td>
+                                <td><?php echo $value[3]?></td>
+                                <td><?php echo $value[4]?></td>
+                                <td><?php echo $value[5]?></td>
+                                <td><?php echo $value[6]?></td>
+                                <td><?php echo $value[7]?></td>
+                                <td class="text-center"><button type="button" class="btn btn-outline-dark">Quitar</button></td>
+                            </tr>
+                        <?php endforeach;?>
                     </tbody>
                 </table>
             </div>
@@ -223,12 +237,12 @@
             </div> -->
             <div class="mb-3">
                 <label for="fecha" class="form-label">Fecha Actual</label>
-                <input type="text" class="form-control" id="fecha" readonly>
+                <input type="text" class="form-control" id="fecha" readonly value="<?php echo date('Y-d-m'); ?>">
             </div>
 
             <div class="mb-3">
                 <label for="hora" class="form-label">Hora Actual</label>
-                <input type="text" class="form-control" id="hora" readonly>
+                <input type="text" class="form-control" id="hora" readonly value="<?php echo $horaActual?>">
             </div>
 
             <div class="mb-3 buttons">
@@ -245,7 +259,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.23/js/uikit-icons.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js'></script><script  src="../js/home.js"></script>
-<script src="../js/ingreso.js"></script>
+<script src="../js/salida.js"></script>
 
 </body>
 </html>

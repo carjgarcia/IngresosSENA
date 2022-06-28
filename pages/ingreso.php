@@ -5,43 +5,15 @@
         header("Location: ../index.html");
     }
     $cedula=$_SESSION['idUser'];
+
     include("../includes/rellenar_datos_usuario.php");
     $time= mysqli_query($con,"SELECT CURRENT_TIME();");
     if (!$time) {
         die("ERROR AL CONSULTAR HORA");
     }
-    $horaActual= mysqli_fetch_array($time)['CURRENT_TIME()'];
-    $alerta=null;
-
-    /* Datos Personales */
-    $nombre=null;
-    $correo=null;
-    $sede=null;
-    /* Informacion de Ingreso */
-    $motivo=null;
-    $vehículo=null;
-    /*  Dispositivos */
-    if (isset($_POST['btnadd'])) {
-        $dispositivos=$_POST['dispositivo'];
-        $marca=$_POST['marca'];
-        $serial=$_POST['serial'];
-        $placa=$_POST['placa'];
-        $uso=$_POST['uso'];
-        $cantidad=$_POST['cantidad'];
-
-        if (!isset($_SESSION['dispositivos'])) {
-            $_SESSION['dispositivos']=array();
-        }
-
-        $_SESSION['dispositivos'][]=array(
-            "dispositivo"=>$dispositivos,
-            "marca"=>$marca,
-            "serial"=>$serial,
-            "placa"=>$placa,
-            "uso"=>$uso,
-            "cantidad"=>$cantidad
-        );
-    }
+    
+    $horaActual= mysqli_fetch_array($time)['CURRENT_TIME()'];    
+    $sede=$usuario["sede"];
 ?>
 <!DOCTYPE html>
 <html lang="en" >
@@ -97,7 +69,8 @@
             <div class="mb-3">
                 <label for="sede" class="form-label">Sede o nodo al que pertenece</label>
                 <select class="form-select" aria-label="Default select example" id="sede" name="sede">
-                    <option selected value="Sede TIC" <?php if(isset($sede)) if($sede=="Sede TIC") echo 'selected'?>>Sede TIC</option>
+                    <option value="select" <?php if(isset($sede)) if($sede==null) echo 'selected'?>>Seleccione sede....</option>
+                    <option value="Sede TIC" <?php if(isset($sede)) if($sede=="Sede TIC") echo 'selected'?>>Sede TIC</option>
                     <option value="Nodo Electricidad Y Electronica" <?php if(isset($sede)) if($sede=="Nodo Electricidad Y Electronica") echo 'selected'?>>Nodo Electricidad Y Electronica</option>
                     <option value="Centro De Comercio Y Servicios" <?php if(isset($sede)) if($sede=="Centro De Comercio Y Servicios") echo 'selected'?>>Centro De Comercio Y Servicios</option>
                     <option value="Sede Energía" <?php if(isset($sede)) if($sede=="Sede Energía") echo 'selected'?>>SENA Sede Energía</option>    
@@ -143,54 +116,32 @@
                 </tbody>
             </table>
             </div>
-            
-            <!-- <div class="tabla">
-                <table class="table" id="tablaDispositivos">
-                    <thead class="thead-ingreso">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Tipo</th>
-                        <th scope="col">Placa o Serial</th>
-                        <th scope="col">Accion</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Telefono</td>
-                        <td>16262545</td>
-                        <td class="text-center"><button type="button" class="btn">Ingresar</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div> -->
 
             
             <div class="mb-3">
-                <label for="dispositivos" class="form-label">¿Trae algun dispositivo?</label>
+                <label for="dispositivos" class="form-label">¿Trae algun dispositivo?*</label>
                 <select class="form-select" aria-label="Default select example" id="dispositivos" name="dispositivos">
                     <option selected value="ninguno">Ninguno</option>
                     <option value="portatil">Portátil</option>
                     <option value="celular">Celular</option>
                     <option value="tablet">Tablet</option>
-                    <option value="otro">Otro dispositivo</option>
+                    <option value="otro">Otro dispositivo</option> PENDIENTE
                 </select>
             </div>
 
             <div class="mb-3 hiddenInput" id="otroDispositivo">
-                <label for="otrodis" class="form-label">Otro dispositivo</label>
+                <label for="otrodis" class="form-label">Otro dispositivo*</label>
                 <input type="text" class="form-control" id="otrodis" placeholder="Digite el tipo de dispositivo">
             </div>
 
             <div class="form-group hiddenInput" id="dispositivoDiv">
                 <div class="mb-3">
-                    <label for="marca" class="form-label">Marca del dispositivo</label>
+                    <label for="marca" class="form-label">Marca del dispositivo*</label>
                     <input type="text" class="form-control" id="marca" name="marca" placeholder="Digite la marca del artículo">
                 </div>
 
                 <div class="mb-3">
-                    <label for="serial" class="form-label">Serial</label>
+                    <label for="serial" class="form-label">Serial*</label>
                     <input type="text" class="form-control" id="serial" name="serial" placeholder="Digite el serial del equipo">
                 </div>
 
@@ -200,7 +151,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="propietario" class="form-label">Propietario</label>
+                    <label for="propietario" class="form-label">Propiedad*</label>
                     <select class="form-select" aria-label="Default select example" id="propietario" name="propietario">
                         <option selected value="propietario">Propietario</option>
                         <option value="sena">SENA</option>
@@ -209,7 +160,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="cantidad" class="form-label">Cantidad</label>
+                    <label for="cantidad" class="form-label">Cantidad*</label>
                     <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad">
                 </div>
                     
@@ -228,7 +179,7 @@
                         </svg>
                         EDITAR
                     </button>
-                    <button id="limpiar">LIMPIAR CAMPOS</button>
+                    <button id="limpiar" class="btn btn-outline-danger">LIMPIAR CAMPOS</button>
                 </div>
             
             </div>
@@ -275,14 +226,9 @@
             <div class="mb-3 buttons">
                 <button class="btn btn-primary button" id="ingresar" name="ingresar">Ingresar</button>
             </div>
-
-            <!-- <form id="formulario">
-                <input type="text" name="nombre" id="nombresss" placeholder="Ingresa el nombre">
-                <button id="btnTest">Ingresar</button>
-            </form> -->
-            <div>
+            <!-- <div>
                 <button id="imprimir">IMPRIMIR DATOS</button>
-            </div>
+            </div> -->
         </form>
     </div>
 </div>
